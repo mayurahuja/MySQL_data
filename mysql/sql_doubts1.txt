@@ -1,0 +1,158 @@
+++++++++++++++++++++main table++++++++++++++++++++++++
+
+MariaDB [assignment1]> desc employee;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| name            | varchar(20) | YES  |     | NULL    |       |
+| job             | varchar(20) | YES  |     | NULL    |       |
+| salary          | int(11)     | YES  |     | NULL    |       |
+| annual_salary   | int(11)     | YES  |     | NULL    |       |
+| employee_number | int(11)     | YES  |     | NULL    |       |
+| hire_date       | date        | YES  |     | NULL    |       |
+| comission       | int(11)     | YES  |     | NULL    |       |
+| dept            | int(11)     | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+8 rows in set (0.010 sec)
+
+MariaDB [assignment1]> select * from employee;
++-----------+------------------+--------+---------------+-----------------+------------+-----------+------+
+| name      | job              | salary | annual_salary | employee_number | hire_date  | comission | dept |
++-----------+------------------+--------+---------------+-----------------+------------+-----------+------+
+| mayur     | lab_staff        |  24000 |        288000 |             111 | 2012-08-22 |     15000 |    9 |
+| sanju     | teacher          |  35000 |        420000 |              21 | 2012-07-22 |     28500 |    8 |
+| tarun     | manager          |  12000 |        144000 |             121 | 2002-08-22 |     16000 |   12 |
+| rd        | teacher          |  38000 |        456000 |             211 | 1984-03-20 |     28500 |   20 |
+| rahul     | clerk            |  18000 |        216000 |              20 | 1980-12-17 |      NULL |   32 |
+| swatantra | president        |  20000 |        240000 |             210 | 1985-12-17 |     50000 |    2 |
+| ravi      | manager          |  12000 |        144000 |             229 | 1980-12-17 |     16000 |   12 |
+| shiva     | facilitator      |  32000 |        384000 |              29 | 2000-12-17 |      NULL |   30 |
+| tanvi     | manager          |  10000 |        120000 |             259 | 1984-03-20 |     16000 |   12 |
+| rege      | teacher          |  22000 |        264000 |              20 | 1980-12-17 |     28500 |    8 |
+| aniket    | president        |  18000 |        216000 |             295 | 2006-05-25 |     50000 |    2 |
+| rekha     | clerk            |  15500 |        186000 |             202 | 1885-05-25 |      1500 |   20 |
+| jaya      | trainer          |  14000 |        168000 |             285 | 1985-12-25 |      NULL | NULL |
+| rupali    | clerk            |  12500 |        150000 |            NULL | 1983-10-22 |      1500 |   20 |
+| kapil     | clerk            |  14800 |        177600 |              20 | 1980-12-17 |      1500 |   20 |
+| chandan   | NULL             |   NULL |          NULL |             101 | 1984-03-20 |      NULL |   30 |
+| taimur    | manager          |  12500 |        150000 |             221 | 0000-00-00 |     16000 |   12 |
+| taimur    | teacher          |  22500 |        270000 |             221 | 2021-12-30 |     28500 |    8 |
+| sunny     | senior developer |  36000 |        432000 |              36 | 2022-04-28 |      6000 |   78 |
++-----------+------------------+--------+---------------+-----------------+------------+-----------+------+
+19 rows in set (0.001 sec)
+
+
+
+
+**********************************doubt one max(salary) ko naam ke sath kaise dikhau**************************
+MariaDB [assignment1]> select max(salary) from employee; yaha pe max salary sahi hai
++-------------+
+| max(salary) |
++-------------+
+|       38000 |
++-------------+
+1 row in set (0.001 sec)
+
+MariaDB [assignment1]> select max(salary),name from employee;
+
+yaha pe max salary sahi hai but phir jab name bola usko dene bola toh
+woh table mai ka phela naam select ka raha hai. aaisa kyu.
++-------------+-------+
+| max(salary) | name  |
++-------------+-------+
+|       38000 | mayur |
++-------------+-------+
+1 row in set (0.000 sec)
+
+
+MariaDB [assignment1]> select max(salary),name,job from employee group by name;
+
+iss command mai taimur ke aage manager bata raha hai but salary column mai taimur jo teacher hai uski salary show kar raha hai.
++-------------+-----------+------------------+
+| max(salary) | name      | job              |
++-------------+-----------+------------------+
+|       18000 | aniket    | president        |
+|        NULL | chandan   | NULL             |
+|       14000 | jaya      | trainer          |
+|       14800 | kapil     | clerk            |
+|       24000 | mayur     | lab_staff        |
+|       18000 | rahul     | clerk            |
+|       12000 | ravi      | manager          |
+|       38000 | rd        | teacher          |
+|       22000 | rege      | teacher          |
+|       15500 | rekha     | clerk            |
+|       12500 | rupali    | clerk            |
+|       35000 | sanju     | teacher          |
+|       32000 | shiva     | facilitator      |
+|       36000 | sunny     | senior developer |
+|       20000 | swatantra | president        |
+|       22500 | taimur    | manager          |
+|       10000 | tanvi     | manager          |
+|       12000 | tarun     | manager          |
++-------------+-----------+------------------+
+18 rows in set (0.001 sec)
+
+***************************************************
+
+##################yeh kya hai###########
+MariaDB [assignment1]> select name,salary,job from employee where salary = any (select max(salary) from employee) group by job;
++------+--------+---------+
+| name | salary | job     |
++------+--------+---------+
+| rd   |  38000 | teacher |
++------+--------+---------+
+1 row in set (0.001 sec)
+
+MariaDB [assignment1]> select name,salary,job from employee where salary = any (select max(salary) from employee) group by name;
++------+--------+---------+
+| name | salary | job     |
++------+--------+---------+
+| rd   |  38000 | teacher |
++------+--------+---------+
+1 row in set (0.001 sec)
+
+MariaDB [assignment1]> select name,salary,job from employee where salary = any (select max(salary) from employee) group by salary;
++------+--------+---------+
+| name | salary | job     |
++------+--------+---------+
+| rd   |  38000 | teacher |
++------+--------+---------+
+1 row in set (0.001 sec)
+
+MariaDB [assignment1]> select name,salary,job from employee where salary in (select max(salary) from employee) group by job;
++------+--------+---------+
+| name | salary | job     |
++------+--------+---------+
+| rd   |  38000 | teacher |
++------+--------+---------+
+1 row in set (0.001 sec)
+
+MariaDB [assignment1]> select name,salary,job from employee where salary = any (select max(salary) from employee);
++------+--------+---------+
+| name | salary | job     |
++------+--------+---------+
+| rd   |  38000 | teacher |
++------+--------+---------+
+1 row in set (0.002 sec)
+
+MariaDB [assignment1]> select name,max(salary),job from employee;
++-------+-------------+-----------+
+| name  | max(salary) | job       |
++-------+-------------+-----------+
+| mayur |       38000 | lab_staff |
++-------+-------------+-----------+
+1 row in set (0.000 sec)
+
+###################################
+
+iss mai dept galat bata raha hai aadi query run ho rahi hai
+
+MariaDB [assignment1]> select dept from employee having count(dept)>3;
++------+
+| dept |
++------+
+|    9 |
++------+
+1 row in set (0.001 sec)
+
+

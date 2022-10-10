@@ -1,0 +1,62 @@
+MariaDB [assignment1]> select * from stud;
++------+-------+---------+---------------+------------+
+| eid  | ename | esalary | email         | dob        |
++------+-------+---------+---------------+------------+
+|    1 | XYZ   | 3000.89 | xyz@gmail.com | 1990-08-30 |
+|    2 | ABC   |  2300.9 | abc@gmail.com | 1980-03-21 |
++------+-------+---------+---------------+------------+
+2 rows in set (0.001 sec)
+
+1] Write Query to insert 1 Record in table that given in above table.
+
+MariaDB [assignment1]> insert into stud values(3,'MNO',2589.28,'mno@gmail.com','2022-04-23');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [assignment1]> select * from stud;
++------+-------+---------+---------------+------------+
+| eid  | ename | esalary | email         | dob        |
++------+-------+---------+---------------+------------+
+|    1 | XYZ   | 3000.89 | xyz@gmail.com | 1990-08-30 |
+|    2 | ABC   |  2300.9 | abc@gmail.com | 1980-03-21 |
+|    3 | MNO   | 2589.28 | mno@gmail.com | 2022-04-23 |
++------+-------+---------+---------------+------------+
+3 rows in set (0.001 sec)
+
+2] Write Query to delete both records from the table in single query.
+
+MariaDB [assignment1]> select * from stud;
++------+-------+---------+---------------+------------+
+| eid  | ename | esalary | email         | dob        |
++------+-------+---------+---------------+------------+
+|    1 | XYZ   | 3000.89 | xyz@gmail.com | 1990-08-30 |
+|    2 | ABC   |  2300.9 | abc@gmail.com | 1980-03-21 |
+|    3 | MNO   | 2589.28 | mno@gmail.com | 2022-04-23 |
++------+-------+---------+---------------+------------+
+3 rows in set (0.001 sec)
+
+MariaDB [assignment1]> delete from stud where eid=1 or eid=2;
+Query OK, 2 rows affected (0.004 sec)
+
+MariaDB [assignment1]> select * from stud;
++------+-------+---------+---------------+------------+
+| eid  | ename | esalary | email         | dob        |
++------+-------+---------+---------------+------------+
+|    3 | MNO   | 2589.28 | mno@gmail.com | 2022-04-23 |
++------+-------+---------+---------------+------------+
+1 row in set (0.001 sec)
+
+
+3]Write Query to update esalary to 4000.68 and dob to 1993-08-30  of employee whose eid is 1 in a single query.
+
+
+MariaDB [assignment1]> update stud set esalary=4000.68,dob='1993-08-03' where eid=3;
+Query OK, 1 row affected (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [assignment1]> select * from stud;
++------+-------+---------+---------------+------------+
+| eid  | ename | esalary | email         | dob        |
++------+-------+---------+---------------+------------+
+|    3 | MNO   | 4000.68 | mno@gmail.com | 1993-08-03 |
++------+-------+---------+---------------+------------+
+1 row in set (0.003 sec)

@@ -1,0 +1,60 @@
+MariaDB [assignment1]> select * from studinfo;
++------+---------+-------+------------+
+| sid  | Roll_no | name  | Percentage |
++------+---------+-------+------------+
+| S15  |      25 | Harry |       98.7 |
+| S23  |      27 | Mac   |       99.2 |
+| S42  |      35 | Rohit |       78.2 |
+| S20  |      20 | Pooja |      83.33 |
+| S18  |      35 | Shree |      87.88 |
++------+---------+-------+------------+
+5 rows in set (0.001 sec)
+
+1) Create a view name student_view containing sid,name and percentage.
+
+MariaDB [assignment1]> create view student_view as select sid, name, percentage from studinfo;
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [assignment1]> select * from student_view;
++------+-------+------------+
+| sid  | name  | percentage |
++------+-------+------------+
+| S15  | Harry |       98.7 |
+| S23  | Mac   |       99.2 |
+| S42  | Rohit |       78.2 |
+| S20  | Pooja |      83.33 |
+| S18  | Shree |      87.88 |
++------+-------+------------+
+5 rows in set (0.001 sec)
+
+2) Write query to sort all the data of student_view according to descending.
+
+MariaDB [assignment1]> select * from student_view order by sid desc,name desc, percentage desc;
++------+-------+------------+
+| sid  | name  | percentage |
++------+-------+------------+
+| S42  | Rohit |       78.2 |
+| S23  | Mac   |       99.2 |
+| S20  | Pooja |      83.33 |
+| S18  | Shree |      87.88 |
+| S15  | Harry |       98.7 |
++------+-------+------------+
+5 rows in set (0.003 sec)
+
+3) Find the name of students from student_view securing highest percentage.
+
+MariaDB [assignment1]> select * from student_view where percentage = (select max(percentage) from student_view);
++------+------+------------+
+| sid  | name | percentage |
++------+------+------------+
+| S23  | Mac  |       99.2 |
++------+------+------------+
+1 row in set (0.005 sec)
+
+4) Write a query to drop the student View.
+
+MariaDB [assignment1]> drop view student_view;
+Query OK, 0 rows affected (0.003 sec)
+
+MariaDB [assignment1]> select * from student_view;
+ERROR 1146 (42S02): Table 'assignment1.student_view' doesn't exist

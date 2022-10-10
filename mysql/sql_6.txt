@@ -1,0 +1,157 @@
+MariaDB [assignment1]> select * from employee1;
++-----+---------+-----------+---------+---------+--------+------------+--------+
+| eid | name    | surname   | dept    | project | city   | dob        | gender |
++-----+---------+-----------+---------+---------+--------+------------+--------+
+|   1 | harshad | dongre    | HR      | P1      | PUNE   | 1976-12-01 | M      |
+|   2 | Mac     | Fernandes | ADMIN   | P3      | THANE  | 1968-05-02 | M      |
+|   3 | Kirti   | Gupta     | ACCOUNT | P2      | VASHI  | 1980-01-01 | M      |
+|   4 | Rohit   | Ghodke    | HR      | P3      | PUNE   | NULL       | M      |
+|   5 | Kanchan | Kulkarni  | ADMIN   | P1      | MUMBAI | 1994-07-03 | F      |
++-----+---------+-----------+---------+---------+--------+------------+--------+
+5 rows in set (0.001 sec)
+
+
+1.Write a query to fetch the Employee name from the emp table in upper case and use the ALIAS name as EmpName.
+
+MariaDB [assignment1]> select upper(name) from employee1 as EmpName;
++-------------+
+| upper(name) |
++-------------+
+| HARSHAD     |
+| MAC         |
+| KIRTI       |
+| ROHIT       |
+| KANCHAN     |
++-------------+
+5 rows in set (0.003 sec)
+
+2.Write a query to fetch the number of employees working in the department ‘HR’.
+MariaDB [assignment1]> select count(eid) from employee1 where dept='hr';
++------------+
+| count(eid) |
++------------+
+|          2 |
++------------+
+1 row in set (0.006 sec)
+
+3.Write a query to get the current date.
+
+MariaDB [assignment1]> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2022-04-27 |
++------------+
+1 row in set (0.002 sec)
+
+4.Write a query to retrieve the first four characters of  Employee surname from the emp table.
+MariaDB [assignment1]> select substr(surname,1,4) from employee1;
++---------------------+
+| substr(surname,1,4) |
++---------------------+
+| dong                |
+| Fern                |
+| Gupt                |
+| Ghod                |
+| Kulk                |
++---------------------+
+5 rows in set (0.001 sec)
+
+5.Write a query to find the names of employees that begin with ‘K’.
+
+MariaDB [assignment1]> select name from employee1 where name like 'k%';
++---------+
+| name    |
++---------+
+| Kirti   |
+| Kanchan |
++---------+
+2 rows in set (0.002 sec)
+
+6.Write a query to retrieve the name and surname in a single column as “FullName”. The first name and the last name must be separated with space.
+
+MariaDB [assignment1]> select concat(name,' ',surname) as concate_wale from employee1;
++------------------+
+| concate_wale     |
++------------------+
+| harshad dongre   |
+| Mac Fernandes    |
+| Kirti Gupta      |
+| Rohit Ghodke     |
+| Kanchan Kulkarni |
++------------------+
+5 rows in set (0.002 sec)
+
+7.Write a query to fetch all the records from the emp table ordered by surname in descending order.
+
+MariaDB [assignment1]> select * from employee1 order by surname desc;
++-----+---------+-----------+---------+---------+--------+------------+--------+
+| eid | name    | surname   | dept    | project | city   | dob        | gender |
++-----+---------+-----------+---------+---------+--------+------------+--------+
+|   5 | Kanchan | Kulkarni  | ADMIN   | P1      | MUMBAI | 0000-00-00 | F      |
+|   3 | Kirti   | Gupta     | ACCOUNT | P2      | VASHI  | 1980-01-01 | M      |
+|   4 | Rohit   | Ghodke    | HR      | P3      | PUNE   | NULL       | M      |
+|   2 | Mac     | Fernandes | ADMIN   | P3      | THANE  | 1968-05-02 | M      |
+|   1 | harshad | dongre    | HR      | P1      | PUNE   | 1976-12-01 | M      |
++-----+---------+-----------+---------+---------+--------+------------+--------+
+5 rows in set (0.003 sec)
+
+8.Write a query to fetch details of all employees excluding the employees with first names, “Rohit” and “kirti” from the emp table.
+
+MariaDB [assignment1]> select * from employee1 where name not like 'rohit' and name not like 'kirti';
++-----+---------+-----------+-------+---------+--------+------------+--------+
+| eid | name    | surname   | dept  | project | city   | dob        | gender |
++-----+---------+-----------+-------+---------+--------+------------+--------+
+|   1 | harshad | dongre    | HR    | P1      | PUNE   | 1976-12-01 | M      |
+|   2 | Mac     | Fernandes | ADMIN | P3      | THANE  | 1968-05-02 | M      |
+|   5 | Kanchan | Kulkarni  | ADMIN | P1      | MUMBAI | 0000-00-00 | F      |
++-----+---------+-----------+-------+---------+--------+------------+--------+
+3 rows in set (0.002 sec)
+
+9.Write a query to fetch department-wise count of employees.
+
+MariaDB [assignment1]> select count(name),dept from employee1 group by dept;
++-------------+---------+
+| count(name) | dept    |
++-------------+---------+
+|           1 | ACCOUNT |
+|           2 | ADMIN   |
+|           2 | HR      |
++-------------+---------+
+3 rows in set (0.005 sec)
+
+10.Write a query to fetch department-wise count of employees sorted by dept. count in ascending order.
+
+MariaDB [assignment1]> select count(name),dept from employee1 group by dept order by dept asc;
++-------------+---------+
+| count(name) | dept    |
++-------------+---------+
+|           1 | ACCOUNT |
+|           2 | ADMIN   |
+|           2 | HR      |
++-------------+---------+
+3 rows in set (0.001 sec)
+
+
+11.Find the name of the department having the number of employee less than 2.
+
+MariaDB [assignment1]> select dept,count(name) from employee1 group by dept having count(dept)<2;
++---------+-------------+
+| dept    | count(name) |
++---------+-------------+
+| ACCOUNT |           1 |
++---------+-------------+
+1 row in set (0.001 sec)
+
+
+12.(extra) Find the name of the department having the number of employee less than 3 count in descending.
+
+MariaDB [assignment1]> select dept,count(name) from employee1 group by dept having count(dept)<3 order by count(name) desc;
++---------+-------------+
+| dept    | count(name) |
++---------+-------------+
+| HR      |           2 |
+| ADMIN   |           2 |
+| ACCOUNT |           1 |
++---------+-------------+
+3 rows in set (0.001 sec)

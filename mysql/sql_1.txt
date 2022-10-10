@@ -1,0 +1,69 @@
+1. Write a SQL statement to create a table named jobs including columns job_id, job_title?
+
+MariaDB [assignment1]> create table jobs (job_id int, job_title varchar(20));
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [assignment1]> desc jobs;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| job_id    | int(11)     | YES  |     | NULL    |       |
+| job_title | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.005 sec)
+
+
+2. Write a SQL statement to alter jobs table with following columns min_salary, max_salary?
+
+MariaDB [assignment1]> alter table jobs add(min_salary int, max_salary int);
+Query OK, 0 rows affected (0.007 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [assignment1]> describe jobs;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| job_id     | int(11)     | YES  |     | NULL    |       |
+| job_title  | varchar(20) | YES  |     | NULL    |       |
+| min_salary | int(11)     | YES  |     | NULL    |       |
+| max_salary | int(11)     | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.005 sec)
+
+
+3. Write a SQL statement to alter jobs table with following columns Name as follows
+
+   min_salary as job_min_salary, max_salary as job_min_salary.
+
+
+MariaDB [assignment1]> alter table jobs change min_salary job_min_salary int, change max_salary job_max_salary int;
+Query OK, 0 rows affected (0.008 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [assignment1]> desc jobs;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| job_id         | int(11)     | YES  |     | NULL    |       |
+| job_title      | varchar(20) | YES  |     | NULL    |       |
+| job_min_salary | int(11)     | YES  |     | NULL    |       |
+| job_max_salary | int(11)     | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.005 sec)
+
+
+4. Write a SQL statement to rename table job to job_info;
+
+MariaDB [assignment1]> alter table jobs rename to job_info;
+Query OK, 0 rows affected (0.011 sec)
+
+MariaDB [assignment1]> desc job_info;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| job_id         | int(11)     | YES  |     | NULL    |       |
+| job_title      | varchar(20) | YES  |     | NULL    |       |
+| job_min_salary | int(11)     | YES  |     | NULL    |       |
+| job_max_salary | int(11)     | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.007 sec)

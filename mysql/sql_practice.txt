@@ -1,0 +1,74 @@
+Create table Employee e_id(PK), Designation d_id(PK) e_id(FK), Project p_id(PK) d_id(FK).
+
+1. find details of employee who has maximum salary as compared to other employees.
+MariaDB [assignment1]> select max(salary) as maximum_salary from employee;
++----------------+
+| maximum_salary |
++----------------+
+|          38000 |
++----------------+
+1 row in set (0.001 sec)
+
+2. display details of employee whose salary is greater than shiva's salary.
+MariaDB [assignment1]> select name,salary from employee where salary>(select salary from employee where name ='shiva');
++-------+--------+
+| name  | salary |
++-------+--------+
+| sanju |  35000 |
+| rd    |  38000 |
+| sunny |  36000 |
++-------+--------+
+3 rows in set (0.001 sec)
+
+3. display details of employee who are earning more than average salary of dept_no 3.
+
+MariaDB [assignment1]> select * from employee where salary > (select avg(salary) from employee where dept=12);
++-----------+------------------+--------+---------------+-----------------+------------+-----------+------+
+| name      | job              | salary | annual_salary | employee_number | hire_date  | comission | dept |
++-----------+------------------+--------+---------------+-----------------+------------+-----------+------+
+| mayur     | lab_staff        |  24000 |        288000 |             111 | 2012-08-22 |     15000 |    9 |
+| sanju     | teacher          |  35000 |        420000 |              21 | 2012-07-22 |     28500 |    8 |
+| tarun     | manager          |  12000 |        144000 |             121 | 2002-08-22 |     16000 |   12 |
+| rd        | teacher          |  38000 |        456000 |             211 | 1984-03-20 |     28500 |   20 |
+| rahul     | clerk            |  18000 |        216000 |              20 | 1980-12-17 |      NULL |   32 |
+| swatantra | president        |  20000 |        240000 |             210 | 1985-12-17 |     50000 |    2 |
+| ravi      | manager          |  12000 |        144000 |             229 | 1980-12-17 |     16000 |   12 |
+| shiva     | facilitator      |  32000 |        384000 |              29 | 2000-12-17 |      NULL |   30 |
+| rege      | teacher          |  22000 |        264000 |              20 | 1980-12-17 |     28500 |    8 |
+| aniket    | president        |  18000 |        216000 |             295 | 2006-05-25 |     50000 |    2 |
+| rekha     | clerk            |  15500 |        186000 |             202 | 1885-05-25 |      1500 |   20 |
+| jaya      | trainer          |  14000 |        168000 |             285 | 1985-12-25 |      NULL | NULL |
+| rupali    | clerk            |  12500 |        150000 |            NULL | 1983-10-22 |      1500 |   20 |
+| kapil     | clerk            |  14800 |        177600 |              20 | 1980-12-17 |      1500 |   20 |
+| taimur    | manager          |  12500 |        150000 |             221 | 0000-00-00 |     16000 |   12 |
+| taimur    | teacher          |  22500 |        270000 |             221 | 2021-12-30 |     28500 |    8 |
+| sunny     | senior developer |  36000 |        432000 |              36 | 2022-04-28 |      6000 |   78 |
++-----------+------------------+--------+---------------+-----------------+------------+-----------+------+
+17 rows in set (0.006 sec)
+
+4. display details of employee who is hired after xyz.
+5. display details according to the location where xyz is working.
+
+sub-queries on 2tables;
+
+1. find all employees who work in finance dept return dept_id, name, dept_name.
+2. find all the employees who work in 'marketing' dept.
+3. to find employees who manages a department return all fields.
+4. to find those dept where starting salary is atleast 8000.
+
+*****************************************************************************************
+1. to fetch details of employees working in 'hr' department.
+2. to find all the employees whose salary is between 5000 & 10000.
+3. to find employees whose DOB is between '2010-08-07' to '2022-08-07'.
+4. details of employees whose name ends with 'a' & contain 5 alphabets.
+5. details of emp excluding names 'xyz' & 'abc'.
+6. fetch details of clerks & analysts.
+7. details of emp working either as clerk & name is 'xyz'.
+8. details of emp whose hire date is '17-dec-2000' & designation is HR.
+9. details of emp whose salary is 'null'.
+10.details of emp with salaries 2000 & 5000.
+11.details of emp working as 'hr' & salary is between between 2000 & 5000.
+12.details of emp whose name do not start with 's' or salary is 5000.
+13.details of emp whose name includes 'h' & salary is 5000.
+14.details of emp who have a & e in their name.
+15.details of emp who has 'm' in 3rd position. 

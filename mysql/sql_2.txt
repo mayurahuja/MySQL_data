@@ -1,0 +1,99 @@
+1.Create the below table.
+
+MariaDB [assignment1]> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| SID     | int(5)      | NO   | PRI | NULL    |       |
+| SNAME   | varchar(30) | YES  |     | NULL    |       |
+| ADDRESS | varchar(50) | YES  |     | NULL    |       |
+| AGE     | int(2)      | YES  |     | NULL    |       |
+| ROLL_NO | bigint(10)  | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.006 sec)
+
+
+1.Not null for surname
+
+MariaDB [assignment1]> alter table student modify SNAME varchar(30) not null;
+Query OK, 0 rows affected (0.037 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [assignment1]> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| SID     | int(5)      | NO   | PRI | NULL    |       |
+| SNAME   | varchar(30) | NO   |     | NULL    |       |
+| ADDRESS | varchar(50) | YES  |     | NULL    |       |
+| AGE     | int(2)      | YES  |     | NULL    |       |
+| ROLL_NO | bigint(10)  | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.005 sec)
+
+2.Age can be only above 3
+MariaDB [assignment1]> alter table student add check (AGE>3);
+Query OK, 0 rows affected (0.046 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+3.Roll no unique
+
+MariaDB [assignment1]> alter table student add unique(ROLL_NO);
+Query OK, 0 rows affected (0.018 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [assignment1]> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| SID     | int(5)      | NO   | PRI | NULL    |       |
+| SNAME   | varchar(30) | NO   |     | NULL    |       |
+| ADDRESS | varchar(50) | YES  |     | NULL    |       |
+| AGE     | int(2)      | YES  |     | NULL    |       |
+| ROLL_NO | bigint(10)  | YES  | UNI | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.004 sec)
+
+4.Add the new column contactno NUMBER
+
+MariaDB [assignment1]> alter table student add (NUMBER bigint(10));
+Query OK, 0 rows affected (0.010 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [assignment1]> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| SID     | int(5)      | NO   | PRI | NULL    |       |
+| SNAME   | varchar(30) | NO   |     | NULL    |       |
+| ADDRESS | varchar(50) | YES  |     | NULL    |       |
+| AGE     | int(2)      | YES  |     | NULL    |       |
+| ROLL_NO | bigint(10)  | YES  | UNI | NULL    |       |
+| NUMBER  | bigint(10)  | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.005 sec)
+
+5.Drop the constraint check on age column
+
+
+MariaDB [assignment1]> alter table student drop constraint constraint_1;
+Query OK, 0 rows affected (0.007 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [assignment1]> insert into student value (3,'abc','abcadd',303,10101,2);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [assignment1]> select * from student;
++-----+-------+---------+---------+--------+------+
+| SID | SNAME | ADDRESS | ROLL_NO | NUMBER | AGE  |
++-----+-------+---------+---------+--------+------+
+|   1 | abc   | abcadd  |     101 |  10101 | 4    |
+|   2 | abc   | abcadd  |     202 |  10101 | 5    |
+|   3 | abc   | abcadd  |     303 |  10101 | 2    |
++-----+-------+---------+---------+--------+------+
+3 rows in set (0.002 sec)
+
+
+
+
+

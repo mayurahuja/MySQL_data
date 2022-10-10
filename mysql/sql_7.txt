@@ -1,0 +1,95 @@
+Write a sql Query to create a view which display Employees Salary Report for monthly Quarterly, Half Yearly and Annual Salary ?
+
+MariaDB [assignment1]> create view view0 as select name as employee_name, salary as monthly, salary*3 as quaterly, salary*6 as half_yearly, salary*12 as yearly from employee;
+Query OK, 0 rows affected (0.006 sec)
+
+MariaDB [assignment1]> select * from view0;
++---------------+---------+----------+-------------+--------+
+| employee_name | monthly | quaterly | half_yearly | yearly |
++---------------+---------+----------+-------------+--------+
+| mayur         |   24000 |    72000 |      144000 | 288000 |
+| sanju         |   35000 |   105000 |      210000 | 420000 |
+| tarun         |   12000 |    36000 |       72000 | 144000 |
+| rd            |   38000 |   114000 |      228000 | 456000 |
+| rahul         |   18000 |    54000 |      108000 | 216000 |
+| swatantra     |   20000 |    60000 |      120000 | 240000 |
+| ravi          |   12000 |    36000 |       72000 | 144000 |
+| shiva         |   32000 |    96000 |      192000 | 384000 |
+| tanvi         |   10000 |    30000 |       60000 | 120000 |
+| rege          |   22000 |    66000 |      132000 | 264000 |
+| aniket        |   18000 |    54000 |      108000 | 216000 |
+| rekha         |   15500 |    46500 |       93000 | 186000 |
+| jaya          |   14000 |    42000 |       84000 | 168000 |
+| rupali        |   12500 |    37500 |       75000 | 150000 |
+| kapil         |   14800 |    44400 |       88800 | 177600 |
+| chandan       |    NULL |     NULL |        NULL |   NULL |
+| taimur        |   12500 |    37500 |       75000 | 150000 |
+| taimur        |   22500 |    67500 |      135000 | 270000 |
+| sunny         |   36000 |   108000 |      216000 | 432000 |
++---------------+---------+----------+-------------+--------+
+19 rows in set (0.002 sec)
+
+
+
+extra..........============view2===============
+writing a single view
+
+MariaDB [assignment1]> create view view2 as select salary*3 from employee;
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [assignment1]> select * from view2;
++----------+
+| salary*3 |
++----------+
+|    72000 |
+|   105000 |
+|    36000 |
+|   114000 |
+|    54000 |
+|    60000 |
+|    36000 |
+|    96000 |
+|    30000 |
+|    66000 |
+|    54000 |
+|    46500 |
+|    42000 |
+|    37500 |
+|    44400 |
+|     NULL |
+|    37500 |
+|    67500 |
+|   108000 |
++----------+
+19 rows in set (0.002 sec)
+
+single querry with aliance===================
+
+MariaDB [assignment1]> create view view2 as select salary*3 as quaterly from employee;
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [assignment1]> select * from view2;
++----------+
+| quaterly |
++----------+
+|    72000 |
+|   105000 |
+|    36000 |
+|   114000 |
+|    54000 |
+|    60000 |
+|    36000 |
+|    96000 |
+|    30000 |
+|    66000 |
+|    54000 |
+|    46500 |
+|    42000 |
+|    37500 |
+|    44400 |
+|     NULL |
+|    37500 |
+|    67500 |
+|   108000 |
++----------+
+19 rows in set (0.002 sec)

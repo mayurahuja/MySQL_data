@@ -1,0 +1,68 @@
+9.Write a query to fetch department-wise count of employees.
+MariaDB [assignment1]>  select count(name), job from employee group by job;
++-------------+------------------+
+| count(name) | job              |
++-------------+------------------+
+|           1 | NULL             |
+|           3 | clerk            |
+|           1 | co-ordinator     |
+|           1 | facilitator      |
+|           1 | lab_staff        |
+|           4 | manager          |
+|           2 | president        |
+|           1 | senior developer |
+|           4 | teacher          |
+|           1 | trainer          |
++-------------+------------------+
+10 rows in set (0.001 sec)
+
+10.Write a query to fetch department-wise count of employees sorted by dept. count in ascending order.
+
+MariaDB [assignment1]>  select count(name), job from employee group by job order by count(name) asc;
++-------------+------------------+
+| count(name) | job              |
++-------------+------------------+
+|           1 | trainer          |
+|           1 | lab_staff        |
+|           1 | facilitator      |
+|           1 | co-ordinator     |
+|           1 | NULL             |
+|           1 | senior developer |
+|           2 | president        |
+|           3 | clerk            |
+|           4 | teacher          |
+|           4 | manager          |
++-------------+------------------+
+10 rows in set (0.001 sec)
+
+11.Find the name of the department having the number of employee less than 2.
+
+MariaDB [assignment1]> select job,count(name) from employee group by job having count(job)<2;
++------------------+-------------+
+| job              | count(name) |
++------------------+-------------+
+| NULL             |           1 |
+| co-ordinator     |           1 |
+| facilitator      |           1 |
+| lab_staff        |           1 |
+| senior developer |           1 |
+| trainer          |           1 |
++------------------+-------------+
+6 rows in set (0.001 sec)
+
+12.(extra) Find the name of the department having the number of employee less than 3 count in ascending.
+
+MariaDB [assignment1]> select job,count(name) from employee group by job having count(job)<3 order by count(name) asc;
++------------------+-------------+
+
+| job              | count(name) |
++------------------+-------------+
+| senior developer |           1 |
+| lab_staff        |           1 |
+| trainer          |           1 |
+| facilitator      |           1 |
+| co-ordinator     |           1 |
+| NULL             |           1 |
+| president        |           2 |
++------------------+-------------+
+7 rows in set (0.001 sec)

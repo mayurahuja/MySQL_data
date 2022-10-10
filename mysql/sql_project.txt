@@ -1,0 +1,229 @@
+	.................main shelter table................
+
+MariaDB [test2]> desc shelter;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| animal_id   | int(5)      | NO   | PRI | NULL    |       |
+| name        | varchar(50) | YES  |     | NULL    |       |
+| age         | int(2)      | YES  |     | NULL    |       |
+| admit_date  | datetime    | YES  |     | NULL    |       |
+| type_id     | int(5)      | YES  |     | NULL    |       |
+| cause_id    | int(5)      | YES  |     | NULL    |       |
+| medicine_id | int(10)     | YES  |     | NULL    |       |
+| reporter_id | int(5)      | YES  |     | NULL    |       |
+| doctor_id   | int(5)      | YES  |     | NULL    |       |
+| location    | varchar(50) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+10 rows in set (0.007 sec)
+
+
+MariaDB [test2]> select * from shelter;
++-----------+--------+------+---------------------+---------+----------+-------------+-------------+-----------+----------------------------+
+| animal_id | name   | age  | admit_date          | type_id | cause_id | medicine_id | reporter_id | doctor_id | location                   |
++-----------+--------+------+---------------------+---------+----------+-------------+-------------+-----------+----------------------------+
+|         1 | chance |    3 | 2021-12-12 22:45:55 |     100 |      200 |         300 |         400 |       500 | thane_bhivandi_highway     |
+|         2 | Angel  |    5 | 2022-03-31 12:30:55 |     122 |      212 |         303 |         410 |       505 | ambernath_badlapur highway |
+|         3 | Chutki |    1 | 2022-05-12 18:40:00 |     122 |      206 |         302 |         412 |       507 | shiv_mandir_ambernath      |
+|         4 | Hero   |    8 | 2022-04-01 10:10:00 |     122 |      205 |         301 |         415 |       502 | lal_chowk_ambernath        |
+|         5 | Roby   |    5 | 2022-04-12 18:20:48 |     120 |      216 |         301 |         414 |       500 | gandhi_road_mulund         |
+|         6 | Betiji |    4 | 2022-04-12 14:20:50 |     105 |      206 |         300 |         413 |       505 | Kailash_colony_ambernath   |
+|         7 | Sweeto |    5 | 2022-03-22 10:20:50 |     123 |      216 |         304 |         408 |       504 | Kailash_nagar_thane        |
+|         8 | Raja   |   12 | 2022-01-02 05:20:50 |     121 |      210 |         302 |         401 |       507 | Navre_nagar_thane          |
+|         9 | Mondy  |    7 | 2021-04-12 18:30:48 |     122 |      211 |         307 |         407 |       502 | anand_nagar_badlapur       |
+|        10 | Buddy  |    2 | 2022-01-12 19:22:48 |     109 |      207 |         303 |         402 |       503 | Khadi_badlapur             |
+|        11 | Glory  |    4 | 2022-05-10 22:22:48 |     108 |      204 |         301 |         403 |       501 | Khadi_nagar_ulhasnagar     |
+|        12 | Kismat |    1 | 2021-04-18 20:22:08 |     101 |      208 |         300 |         408 |       505 | shivalya_ot_bhivandi       |
+|        13 | Dhara  |    3 | 2022-02-18 08:10:28 |     103 |      203 |         305 |         404 |       507 | dokali_thane               |
+|        14 | Keeper |    3 | 2022-03-13 18:22:48 |     106 |      202 |         302 |         405 |       500 | bhatiya_ulhasnagar         |
+|        15 | Ginger |    5 | 2022-02-12 17:22:48 |     107 |      203 |         300 |         406 |       505 | netaji_ulhasnagar          |
+|        16 | Kalu   |    1 | 2022-03-12 18:22:48 |     108 |      204 |         301 |         407 |       507 | ambernath_station_road     |
+|        17 | Patch  |    2 | 2022-01-12 10:30:00 |     109 |      205 |         305 |         408 |       502 | bhatiya_badlapur           |
+|        18 | Pearl  |    9 | 2022-01-18 12:30:00 |     110 |      206 |         306 |         409 |       507 | dudhnaka_ulhasnagar        |
+|        19 | Baadam |    3 | 2022-02-19 01:30:00 |     111 |      207 |         302 |         410 |       501 | nehru_nagar_kalyan         |
+|        20 | Angur  |    2 | 2022-01-18 16:02:48 |     115 |      208 |         301 |         411 |       500 | badlapur_station_road      |
+|        21 | Chotu  |    7 | 0000-00-00 00:00:00 |     116 |      210 |         304 |         415 |       505 | vithal_road_ulhasnagar     |
+|        22 | Rocky  |    5 | 2021-01-18 12:20:48 |     121 |      215 |         307 |         413 |       500 | ambernath_station_road     |
+|        23 | Bony   |    9 | 2021-02-22 16:20:48 |     119 |      213 |         300 |         414 |       506 | badlapur_station_road      |
+|        24 | Tittu  |    1 | 2019-12-22 16:20:48 |     118 |      214 |         302 |         404 |       506 | ambernath_station_road     |
+|        25 | Munna  |    8 | 2022-05-11 22:20:55 |     117 |      206 |         305 |         414 |       500 | bhaji_market_kalyan        |
++-----------+--------+------+---------------------+---------+----------+-------------+-------------+-----------+----------------------------+
+25 rows in set (0.000 sec)
+
+...........animal details...................
+
+MariaDB [test2]> desc details;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| type_id | int(5)      | NO   | PRI | NULL    |       |
+| animal  | varchar(30) | YES  |     | NULL    |       |
+| gender  | varchar(20) | YES  |     | NULL    |       |
+| type    | varchar(30) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.005 sec)
+
+
+MariaDB [test2]> select * from details;
++---------+--------+-------------+-----------+
+| type_id | animal | gender      | type      |
++---------+--------+-------------+-----------+
+|     100 | dog    | male        | stray     |
+|     101 | dog    | male        | indoor    |
+|     102 | dog    | male        | abandoned |
+|     103 | dog    | male        | lost      |
+|     104 | dog    | female      | stray     |
+|     105 | dog    | female      | indoor    |
+|     106 | dog    | female      | abandoned |
+|     107 | dog    | female      | lost      |
+|     108 | dog    | preg_female | stray     |
+|     109 | dog    | preg_female | indoor    |
+|     110 | dog    | preg_female | abandoned |
+|     111 | dog    | preg_female | lost      |
+|     112 | cat    | male        | stray     |
+|     113 | cat    | male        | indoor    |
+|     114 | cat    | male        | abandoned |
+|     115 | cat    | male        | lost      |
+|     116 | cat    | female      | stray     |
+|     117 | cat    | female      | indoor    |
+|     118 | cat    | female      | abandoned |
+|     119 | cat    | female      | lost      |
+|     120 | cat    | preg_female | stray     |
+|     121 | cat    | preg_female | indoor    |
+|     122 | cat    | preg_female | abandoned |
+|     123 | cat    | preg_female | lost      |
++---------+--------+-------------+-----------+
+24 rows in set (0.001 sec)
+
+...............doctor details.................
+
+MariaDB [test2]> desc doctor;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| doctor_id  | int(5)      | NO   | PRI | NULL    |       |
+| dr_name    | varchar(30) | YES  |     | NULL    |       |
+| speciality | varchar(30) | YES  |     | NULL    |       |
+| conatact   | bigint(12)  | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.009 sec)
+
+MariaDB [test2]> select * from doctor;
++-----------+-------------------+-------------------+------------+
+| doctor_id | dr_name           | speciality        | conatact   |
++-----------+-------------------+-------------------+------------+
+|       500 | Gauri Dudhmandhe  | bone&joints       | 8899986653 |
+|       501 | Sunny Shinde      | bone&joints       | 8899789632 |
+|       502 | Avani Sathe       | skin&aqua_therapy | 9866538845 |
+|       503 | Tanvi Ghan        | aqua_therapy      | 8855882660 |
+|       504 | Shiva Mandani     | skin_specialist   | 8844693258 |
+|       505 | Raj Chotwani      | Vet               | 8855882660 |
+|       506 | Aniket Helgaonkar | Vet               | 9619664065 |
+|       507 | Mayur Ahuja       | Vet               | 7387136138 |
++-----------+-------------------+-------------------+------------+
+8 rows in set (0.001 sec)
+
+.................reporter details....................
+
+MariaDB [test2]> desc reporter;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| reporter_id | int(5)       | NO   | PRI | NULL    |       |
+| name        | varchar(50)  | YES  |     | NULL    |       |
+| surname     | varchar(50)  | YES  |     | NULL    |       |
+| address     | varchar(100) | YES  |     | NULL    |       |
+| contact     | bigint(12)   | YES  |     | NULL    |       |
+| email       | varchar(100) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+6 rows in set (0.007 sec)
+
+MariaDB [test2]> select * from reporter;
++-------------+-----------+---------+------------+------------+--------------------------+
+| reporter_id | name      | surname | address    | contact    | email                    |
++-------------+-----------+---------+------------+------------+--------------------------+
+|         400 | Anuya     | Desai   | Mumbai     | 9321810013 | anuya.desai@gmail.com    |
+|         401 | Akanksha  | Vyas    | Dadar      | 8855882440 | akanksha.vyas@gmail.com  |
+|         402 | Arushi    | Shukla  | Ambernath  | 7744558896 | arushi.shukla@gmail.com  |
+|         403 | Bani      | Desai   | Ulhasnagar | 8877559966 | bani.desai@gmail.com     |
+|         404 | Shreya    | Mulik   | Matuga     | 8866882442 | shreya.mulik@gmail.com   |
+|         405 | Hetvi     | Shah    | Ambernath  | 7744552266 | hetvi.shah@gmail.com     |
+|         406 | Jeet      | Ahuja   | Ulhasnagar | 8844669966 | jeet.ahuja@gmail.com     |
+|         407 | Nidhi     | Bhatt   | Ghatkopar  | 8855112255 | nidhi.bhat@gmail.com     |
+|         408 | Pravin    | Shukla  | Ambernath  | 7744551169 | pravin.shukla@gmail.com  |
+|         409 | Raj       | Agarwal | Ulhasnagar | 8877759967 | raj.agarwal@gmail.com    |
+|         410 | Sakshi    | Mehta   | Matuga     | 8866896442 | sakshi.mehta@gmail.com   |
+|         411 | Hemma     | Shah    | Ulhasnagar | 7744551236 | hemma.shah@gmail.com     |
+|         412 | Jeet      | Singh   | Ulhasnagar | 8844664569 | jeet.singh@gmail.com     |
+|         413 | Shubanghi | Bhatt   | Badlapur   | 8855112587 | shubanghi.bhat@gmail.com |
+|         414 | Vikram    | Jha     | Ambernath  | 7744551478 | vikram.jha@gmail.com     |
+|         415 | Nutan     | Desai   | Ulhasnagar | 8877751212 | nutan.desai@gmail.com    |
++-------------+-----------+---------+------------+------------+--------------------------+
+16 rows in set (0.001 sec)
+
+..................cause table...................
+
+MariaDB [test2]> desc cause;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| cause_id      | int(5)      | NO   | PRI | NULL    |       |
+| common_causes | varchar(50) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+2 rows in set (0.009 sec)
+
+MariaDB [test2]> select * from cause;
++----------+----------------------------+
+| cause_id | common_causes              |
++----------+----------------------------+
+|      200 | Lice                       |
+|      201 | Hit and run                |
+|      202 | Bitten by dog              |
+|      203 | Hit by someone             |
+|      204 | Abondoned and injured      |
+|      205 | Maggot wound on head       |
+|      206 | Maggot wound on neck       |
+|      207 | Maggot wound on back       |
+|      208 | Foreign body ingestion     |
+|      209 | Poisoning                  |
+|      210 | Cat bite Abscesses         |
+|      211 | Eye Trauma                 |
+|      212 | Cruciate Ligament Ruptures |
+|      213 | Lameness/Back trouble      |
+|      214 | Torn or Broken nail        |
+|      215 | Heat Stroke or Dehydration |
+|      216 | Rabbies                    |
++----------+----------------------------+
+17 rows in set (0.001 sec)
+
+....................medicine table.................
+
+MariaDB [test2]> desc medicine;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| medicine_id | int(10)      | NO   | PRI | NULL    |       |
+| med_name    | varchar(100) | YES  |     | NULL    |       |
+| type        | varchar(50)  | YES  |     | NULL    |       |
+| dose        | varchar(30)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.008 sec)
+
+MariaDB [test2]> select * from medicine;
++-------------+--------------+----------------------------------------+-------------------------+
+| medicine_id | med_name     | type                                   | dose                    |
++-------------+--------------+----------------------------------------+-------------------------+
+|         300 | Meloxicam    | oral tablet for cats                   | every 24hours           |
+|         301 | Deracoxib    | anti-inflammatory drug, dexamethasone  | based on pet-weight     |
+|         302 | Carprofen    | arthritis management, chewable         | once in 3 days          |
+|         303 | Fenbendazole | antiparasite drug                      | based on age and weight |
+|         304 | Maropitant   | antimec in dogs/cats                   | as per the wound        |
+|         305 | Cefovecin    | Antimicrobial                          | as per weight           |
+|         306 | Selamectin   | Antiparastic,fleas,roundworms,earmites | can be frequent         |
+|         307 | Pimobenden   | Congestive heart failure               | every 8 hour            |
++-------------+--------------+----------------------------------------+-------------------------+
+8 rows in set (0.000 sec)
+.....................................................
+
+
+

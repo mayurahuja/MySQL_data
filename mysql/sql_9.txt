@@ -1,0 +1,303 @@
+Question............
+
+1. List the names and hire dates in format ('20/3/84') in dept 20.
+
+MariaDB [assignment1]> select name,hire_date,dept,job from employee where hire_date='1984-03-20' and dept=20;
++------+------------+------+---------+
+| name | hire_date  | dept | job     |
++------+------------+------+---------+
+| rd   | 1984-03-20 |   20 | teacher |
++------+------------+------+---------+
+1 row in set (0.000 sec)
+
+2. How many months has the president worked for the company.
+
+MariaDB [assignment1]> select name,job,hire_date,datediff(curdate(),hire_date)/12 from employee where job='president';
++-----------+-----------+------------+----------------------------------+
+| name      | job       | hire_date  | datediff(curdate(),hire_date)/12 |
++-----------+-----------+------------+----------------------------------+
+| swatantra | president | 1985-12-17 |                        1107.3333 |
+| aniket    | president | 2006-05-25 |                         485.3333 |
++-----------+-----------+------------+----------------------------------+
+2 rows in set (0.001 sec)
+
+3. List the names of all employees where hire date is in month of December.
+
+MariaDB [assignment1]> select name,hire_date from employee where month(hire_date)=12;
++-----------+------------+
+| name      | hire_date  |
++-----------+------------+
+| rahul     | 1980-12-17 |
+| swatantra | 1985-12-17 |
+| ravi      | 1980-12-17 |
+| shiva     | 2000-12-17 |
+| rege      | 1980-12-17 |
+| jaya      | 1985-12-25 |
+| kapil     | 1980-12-17 |
+| taimur    | 2021-12-30 |
++-----------+------------+
+8 rows in set (0.002 sec)
+
+4. Find average annual salary per job in each department.
+
+MariaDB [assignment1]> select job,avg(annual_salary) as average_annual_salary from employee group by job;
++------------------+-----------------------+
+| job              | average_annual_salary |
++------------------+-----------------------+
+| NULL             |                  NULL |
+| clerk            |           171200.0000 |
+| co-ordinator     |           216000.0000 |
+| facilitator      |           384000.0000 |
+| lab_staff        |           288000.0000 |
+| manager          |           139500.0000 |
+| president        |           228000.0000 |
+| senior developer |           432000.0000 |
+| teacher          |           352500.0000 |
+| trainer          |           168000.0000 |
++------------------+-----------------------+
+10 rows in set (0.001 sec)
+
+5. Count number of employees in dept 30
+
+MariaDB [assignment1]> select count(name) as count_of_employees_dept_30 from employee where dept=30;
++----------------------------+
+| count_of_employees_dept_30 |
++----------------------------+
+|                          2 |
++----------------------------+
+1 row in set (0.001 sec)
+
+6. Compute average, minimum and maximum salaries of employees for each department
+
+MariaDB [assignment1]> select avg(salary) as average_salary, min(salary) as minimum_salary, max(salary) as maximum_salary, job from employee group by job;
++----------------+----------------+----------------+------------------+
+| average_salary | minimum_salary | maximum_salary | job              |
++----------------+----------------+----------------+------------------+
+|           NULL |           NULL |           NULL | NULL             |
+|     14266.6667 |          12500 |          15500 | clerk            |
+|     18000.0000 |          18000 |          18000 | co-ordinator     |
+|     32000.0000 |          32000 |          32000 | facilitator      |
+|     24000.0000 |          24000 |          24000 | lab_staff        |
+|     11625.0000 |          10000 |          12500 | manager          |
+|     19000.0000 |          18000 |          20000 | president        |
+|     36000.0000 |          36000 |          36000 | senior developer |
+|     29375.0000 |          22000 |          38000 | teacher          |
+|     14000.0000 |          14000 |          14000 | trainer          |
++----------------+----------------+----------------+------------------+
+10 rows in set (0.001 sec)
+
+7. Display deptno's where more than two clerks are working
+
+MariaDB [assignment1]> select dept from employee where job='clerk' group by dept having count(job)>2;
++------+
+| dept |
++------+
+|   20 |
++------+
+1 row in set (0.006 sec)
+
+8. Who was the first employee hired in each department
+
+MariaDB [assignment1]> select name,job,min(hire_date) from employee group by job;
++-----------+------------------+----------------+
+| name      | job              | min(hire_date) |
++-----------+------------------+----------------+
+| chandan   | NULL             | 1984-03-20     |
+| rahul     | clerk            | 1885-05-25     |
+| shiva     | facilitator      | 2000-12-17     |
+| mayur     | lab_staff        | 2012-08-22     |
+| tarun     | manager          | 0000-00-00     |
+| swatantra | president        | 1985-12-17     |
+| sunny     | senior developer | 2022-04-28     |
+| sanju     | teacher          | 1980-12-17     |
+| jaya      | trainer          | 1985-12-25     |
++-----------+------------------+----------------+
+9 rows in set (0.001 sec)
+
+9. Show count of employees and their total sum of salary. Display only those jobs where minimum salary is greater than or equal to 3000
+
+MariaDB [assignment1]> select name,salary from employee where salary in (select salary from employee where salary>=30000);
++-------+--------+
+| name  | salary |
++-------+--------+
+| sanju |  35000 |
+| rd    |  38000 |
+| shiva |  32000 |
+| sunny |  36000 |
++-------+--------+
+4 rows in set (0.001 sec)
+
+MariaDB [assignment1]> select count(name),sum(salary) from employee where salary in (select salary from employee where salary>=30000);
++-------------+-------------+
+| count(name) | sum(salary) |
++-------------+-------------+
+|           4 |      141000 |
++-------------+-------------+
+1 row in set (0.011 sec)
+
+10. Find out difference between highest and lowest salaries from emp table
+
+MariaDB [assignment1]> select max(salary),min(salary) from employee;
++-------------+-------------+
+| max(salary) | min(salary) |
++-------------+-------------+
+|       38000 |       10000 |
++-------------+-------------+
+1 row in set (0.001 sec)
+
+MariaDB [assignment1]> select max(salary) - min(salary) difference from employee;
++------------+
+| difference |
++------------+
+|      28000 |
++------------+
+1 row in set (0.001 sec)
+
+11. Find all departments which have more than 3 employees.
+
+MariaDB [assignment1]> select dept,count(dept) from employee group by dept having count(dept)>3;
++------+-------------+
+| dept | count(dept) |
++------+-------------+
+|   12 |           4 |
+|   20 |           4 |
++------+-------------+
+2 rows in set (0.002 sec)
+
+12. Find the employees who earn more than the lowest salary in each department.
+
+MariaDB [assignment1]> select name,job from employee where salary>(select min(salary) from employee) group by job;
++-----------+------------------+
+| name      | job              |
++-----------+------------------+
+| rahul     | clerk            |
+| shiva     | facilitator      |
+| mayur     | lab_staff        |
+| tarun     | manager          |
+| swatantra | president        |
+| sunny     | senior developer |
+| sanju     | teacher          |
+| jaya      | trainer          |
++-----------+------------------+
+8 rows in set (0.000 sec)
+
+
+13. Display employee who earn more than the lowest salary in department 30
+
+MariaDB [assignment1]> select name,salary from employee where salary > any(select salary from employee where dept=30);
++-------+--------+
+| name  | salary |
++-------+--------+
+| sanju |  35000 |
+| rd    |  38000 |
+| sunny |  36000 |
++-------+--------+
+3 rows in set (0.001 sec)
+
+14. Find employees who earn more than every employee in each department ordering to the department.
+
+MariaDB [assignment1]> select name,max(salary),dept from employee where dept in (select dept from employee) group by dept;
++-----------+-------------+------+
+| name      | max(salary) | dept |
++-----------+-------------+------+
+| swatantra |       20000 |    2 |
+| sanju     |       35000 |    8 |
+| mayur     |       24000 |    9 |
+| tarun     |       12500 |   12 |
+| rd        |       38000 |   20 |
+| shiva     |       32000 |   30 |
+| rahul     |       18000 |   32 |
+| sunny     |       36000 |   78 |
++-----------+-------------+------+
+8 rows in set (0.001 sec)
+
+
+15. Determine average salary of employees.
+
+MariaDB [assignment1]> select avg(salary),job from employee group by job;
++-------------+------------------+
+| avg(salary) | job              |
++-------------+------------------+
+|        NULL | NULL             |
+|  15200.0000 | clerk            |
+|  32000.0000 | facilitator      |
+|  24000.0000 | lab_staff        |
+|  11625.0000 | manager          |
+|  19000.0000 | president        |
+|  36000.0000 | senior developer |
+|  29375.0000 | teacher          |
+|  14000.0000 | trainer          |
++-------------+------------------+
+9 rows in set (0.001 sec)
+
+16. Find the job with highest average salary
+
+MariaDB [assignment1]> select avg(salary) from employee group by job order by avg(salary) desc limit 1;
++-------------+
+| avg(salary) |
++-------------+
+|  36000.0000 |
++-------------+
+1 row in set (0.001 sec)
+
+
+17. Display the name of job, hire date for employees whose salary is greater than the highest salary in any SALES department
+
+MariaDB [assignment1]> select name,salary from employee where salary>(select max(salary) from employee where job='sales');
++-----------+--------+
+| name      | salary |
++-----------+--------+
+| mayur     |  24000 |
+| sanju     |  35000 |
+| rd        |  38000 |
+| swatantra |  20000 |
+| shiva     |  32000 |
+| rege      |  22000 |
+| taimur    |  22500 |
+| sunny     |  36000 |
++-----------+--------+
+8 rows in set (0.001 sec)
+
+18. Find out all the jobs either in department 20 or where salary is greater than 3000.
+
+MariaDB [assignment1]> select job from employee where dept=20 and salary>3000;
++---------+
+| job     |
++---------+
+| teacher |
+| clerk   |
+| clerk   |
+| clerk   |
++---------+
+4 rows in set (0.006 sec)
+
+19. Find out the employees who earn the highest salary in each department.
+
+MariaDB [assignment1]> select max(salary), dept from employee group by dept;
++-------------+------+
+| max(salary) | dept |
++-------------+------+
+|       14000 | NULL |
+|       20000 |    2 |
+|       35000 |    8 |
+|       24000 |    9 |
+|       12500 |   12 |
+|       38000 |   20 |
+|       32000 |   30 |
+|       18000 |   32 |
+|       36000 |   78 |
++-------------+------+
+9 rows in set (0.001 sec)
+
+20. Display the employees who are doing the same job as ‘FORD’.
+
+MariaDB [assignment1]> select name from employee where dept=(Select dept from employee where name='ford');
++--------+
+| name   |
++--------+
+| rd     |
+| rekha  |
+| rupali |
+| kapil  |
++--------+
+4 rows in set (0.001 sec)

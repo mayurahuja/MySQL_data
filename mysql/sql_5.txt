@@ -1,0 +1,230 @@
+Write the queries for
+
+1. Display name, job, salary, and annual salary of all employees.
+
+MariaDB [assignment1]> select name,job,salary,annual_salary from employee;
++-------+-----------+--------+---------------+
+| name  | job       | salary | annual_salary |
++-------+-----------+--------+---------------+
+| mayur | lab_staff |  24000 |        288000 |
+| sanju | teacher   |  35000 |        420000 |
+| tarun | staff     |  12000 |        144000 |
++-------+-----------+--------+---------------+
+3 rows in set (0.001 sec)
+
+2. Display all the different job types.
+
+MariaDB [assignment1]> select distinct job from employee;
++--------------+
+| job          |
++--------------+
+| lab_staff    |
+| teacher      |
+| staff        |
+| co-ordinator |
+| it           |
+| facilitator  |
++--------------+
+6 rows in set (0.001 sec)
+
+3. Display name and salary of all employees who are CLERK.
+
+MariaDB [assignment1]> select name,salary from employee where job='clerk';
++--------+--------+
+| name   | salary |
++--------+--------+
+| rekha  |  15500 |
+| rupali |  12500 |
+| kapil  |  14800 |
++--------+--------+
+3 rows in set (0.003 sec)
+
+4. Display the employee number, name, job title, salary and hire date of employees of department number 20 and hiredate as 1980-12-17.
+
+MariaDB [assignment1]> select employee_number, name, job, salary, hire_date from employee where employee_number=20 and hire_date='1980-12-17';
++-----------------+-------+--------------+--------+------------+
+| employee_number | name  | job          | salary | hire_date  |
++-----------------+-------+--------------+--------+------------+
+|              20 | rahul | co-ordinator |  18000 | 1980-12-17 |
+|              20 | rege  | teacher      |  22000 | 1980-12-17 |
+|              20 | kapil | clerk        |  14800 | 1980-12-17 |
++-----------------+-------+--------------+--------+------------+
+3 rows in set (0.004 sec)
+
+5. Display the department name and department number for departments with numbers greater than or equal to 20.
+
+MariaDB [assignment1]> select name,employee_number from employee where employee_number >=20;
++-----------+-----------------+
+| name      | employee_number |
++-----------+-----------------+
+| mayur     |             111 |
+| sanju     |              21 |
+| tarun     |             121 |
+| rd        |             211 |
+| rahul     |              20 |
+| swatantra |             210 |
+| ravi      |             229 |
+| shiva     |              29 |
+| tanvi     |             259 |
+| rege      |              20 |
+| aniket    |             295 |
+| rekha     |             202 |
+| jaya      |             285 |
+| kapil     |              20 |
+| NULL      |             101 |
+| ganesh    |             221 |
+| rajesh    |             221 |
++-----------+-----------------+
+17 rows in set (0.001 sec)
+
+6. Display the name, salary and commission of employees whose commission is greater than their salary.
+
+MariaDB [assignment1]> select name,salary,comission from employee where comission>salary;
++-----------+--------+-----------+
+| name      | salary | comission |
++-----------+--------+-----------+
+| tarun     |  12000 |     16000 |
+| swatantra |  20000 |     50000 |
+| ravi      |  12000 |     16000 |
+| tanvi     |  10000 |     16000 |
+| rege      |  22000 |     28500 |
+| aniket    |  18000 |     50000 |
+| ganesh    |  12500 |     16000 |
+| rajesh    |  22500 |     28500 |
++-----------+--------+-----------+
+8 rows in set (0.003 sec)
+
+7. Display the name, job title and salary of everyone hired during 1983.
+	MariaDB [assignment1]> select name,job, salary from employee where hire_date between '1983-01-01' and '1983-12-31';
++--------+-------+--------+
+| name   | job   | salary |
++--------+-------+--------+
+| rupali | clerk |  12500 |
++--------+-------+--------+
+1 row in set (0.003 sec)
+
+8. Display the names of employees where salaries are less than 5500.
+
+MariaDB [assignment1]> select name from employee where salary<5500;
+Empty set (0.001 sec)
+
+MariaDB [assignment1]> select name from employee where salary<12000;
++-------+
+| name  |
++-------+
+| tanvi |
++-------+
+1 row in set (0.001 sec)
+
+9. Display the names and employee numbers of managers who earn more than 7500.
+
+MariaDB [assignment1]> select name, employee_number from employee where job='manager' and salary>7500;
++--------+-----------------+
+| name   | employee_number |
++--------+-----------------+
+| tarun  |             121 |
+| ravi   |             229 |
+| tanvi  |             259 |
+| ganesh |             221 |
++--------+-----------------+
+4 rows in set (0.004 sec)
+
+10. Display the information about managers and the president from the EMP table,order by department number.
+
+MariaDB [assignment1]> select * from employee where job='manager' or job='president' order by employee_number;
++-----------+-----------+--------+---------------+-----------------+------------+-----------+
+| name      | job       | salary | annual_salary | employee_number | hire_date  | comission |
++-----------+-----------+--------+---------------+-----------------+------------+-----------+
+| tarun     | manager   |  12000 |        144000 |             121 | 2002-08-22 |     16000 |
+| swatantra | president |  20000 |        240000 |             210 | 1985-12-17 |     50000 |
+| ganesh    | manager   |  12500 |        150000 |             221 | 0000-00-00 |     16000 |
+| ravi      | manager   |  12000 |        144000 |             229 | 1980-12-17 |     16000 |
+| tanvi     | manager   |  10000 |        120000 |             259 | 2002-01-17 |     16000 |
+| aniket    | president |  18000 |        216000 |             295 | 2006-05-25 |     50000 |
++-----------+-----------+--------+---------------+-----------------+------------+-----------+
+6 rows in set (0.002 sec)
+
+11. Display all the employees whose name do not end with ‘S’
+
+MariaDB [assignment1]> select name from employee where name not like '%s';
++-----------+
+| name      |
++-----------+
+| mayur     |
+| sanju     |
+| tarun     |
+| rd        |
+| rahul     |
+| swatantra |
+| ravi      |
+| shiva     |
+| tanvi     |
+| rege      |
+| aniket    |
+| rekha     |
+| jaya      |
+| rupali    |
+| kapil     |
+| ganesh    |
+| rajesh    |
++-----------+
+17 rows in set (0.010 sec)
+
+12. Display all the employees whose name start with ‘C’.
+
+MariaDB [assignment1]> select name from employee where name like 'c%';
++---------+
+| name    |
++---------+
+| chandan |
++---------+
+1 row in set (0.001 sec)
+
+13. Display the name, job and department of employees whose name falls in the alphabetical range ‘C’ to ‘L’.
+
+MariaDB [assignment1]> select name,job from employee where name between 'c%' and 'm%';
++---------+---------+
+| name    | job     |
++---------+---------+
+| jaya    | trainer |
+| kapil   | clerk   |
+| chandan | NULL    |
++---------+---------+
+3 rows in set (0.001 sec)
+
+14. Display the employee details working in department 20, 30 or 40.
+
+MariaDB [assignment1]> select * from employee where employee_number=20 or employee_number=30 or employee_number=40;
++-------+--------------+--------+---------------+-----------------+------------+-----------+
+| name  | job          | salary | annual_salary | employee_number | hire_date  | comission |
++-------+--------------+--------+---------------+-----------------+------------+-----------+
+| rahul | co-ordinator |  18000 |        216000 |              20 | 1980-12-17 |      NULL |
+| rege  | teacher      |  22000 |        264000 |              20 | 1980-12-17 |     28500 |
+| kapil | clerk        |  14800 |        177600 |              20 | 1980-12-17 |      1500 |
++-------+--------------+--------+---------------+-----------------+------------+-----------+
+3 rows in set (0.001 sec)
+
+MariaDB [assignment1]> select * from employee where employee_number=20 or employee_number=111 or employee_number=221;
++--------+--------------+--------+---------------+-----------------+------------+-----------+
+| name   | job          | salary | annual_salary | employee_number | hire_date  | comission |
++--------+--------------+--------+---------------+-----------------+------------+-----------+
+| mayur  | lab_staff    |  24000 |        288000 |             111 | 2012-08-22 |     15000 |
+| rahul  | co-ordinator |  18000 |        216000 |              20 | 1980-12-17 |      NULL |
+| rege   | teacher      |  22000 |        264000 |              20 | 1980-12-17 |     28500 |
+| kapil  | clerk        |  14800 |        177600 |              20 | 1980-12-17 |      1500 |
+| ganesh | manager      |  12500 |        150000 |             221 | 0000-00-00 |     16000 |
+| rajesh | teacher      |  22500 |        270000 |             221 | 2021-12-30 |     28500 |
++--------+--------------+--------+---------------+-----------------+------------+-----------+
+6 rows in set (0.001 sec)
+
+15. Display all the employees whose names start with ‘T’ and ends with ‘R’.
+
+MariaDB [assignment1]> select name from employee where name like 't%r';
++--------+
+| name   |
++--------+
+| taimur |
+| taimur |
++--------+
+2 rows in set (0.001 sec)
+

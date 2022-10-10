@@ -1,0 +1,101 @@
+1.Write a SQL query to insert 2 (rows) jobs in table with all values.
+
+MariaDB [assignment1]> desc job_info;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| job_id         | int(11)     | YES  |     | NULL    |       |
+| job_title      | varchar(20) | YES  |     | NULL    |       |
+| job_min_salary | int(11)     | YES  |     | NULL    |       |
+| job_max_salary | int(11)     | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.013 sec)
+
+MariaDB [assignment1]> insert into job_info values(1,'manager',25000,35000);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [assignment1]> insert into job_info values('2','assist_manager',15000,25000);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [assignment1]> select * from job_info;
++--------+----------------+----------------+----------------+
+| job_id | job_title      | job_min_salary | job_max_salary |
++--------+----------------+----------------+----------------+
+|      1 | manager        |          25000 |          35000 |
+|      2 | assist_manager |          15000 |          25000 |
++--------+----------------+----------------+----------------+
+2 rows in set (0.001 sec)
+
+
+2.Write a SQL query to insert 3 (rows) jobs in table with job_id, job_title only using single
+
+  query.
+
+MariaDB [assignment1]> insert into job_info (job_id,job_title) values (5,'sales'),(6,'cto'),(7,'ceo');
+Query OK, 3 rows affected (0.004 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [assignment1]> select * from job_info;
++--------+----------------+----------------+----------------+
+| job_id | job_title      | job_min_salary | job_max_salary |
++--------+----------------+----------------+----------------+
+|      1 | manager        |          25000 |          35000 |
+|      2 | assist_manager |          15000 |          25000 |
+|      3 | intern         |          10000 |          20000 |
+|      4 | trainee        |           8000 |          15000 |
+|      5 | sales          |           NULL |           NULL |
+|      6 | cto            |           NULL |           NULL |
+|      7 | ceo            |           NULL |           NULL |
++--------+----------------+----------------+----------------+
+7 rows in set (0.001 sec)
+
+
+3.Write a SQL query to delete all the jobs those minimum salary is less than 20000.
+
+MariaDB [assignment1]> delete from job_info where job_min_salary<20000;
+Query OK, 3 rows affected (0.005 sec)
+
+MariaDB [assignment1]> select * from job_info;
++--------+-----------+----------------+----------------+
+| job_id | job_title | job_min_salary | job_max_salary |
++--------+-----------+----------------+----------------+
+|      1 | manager   |          25000 |          35000 |
+|      5 | sales     |           NULL |           NULL |
+|      6 | cto       |           NULL |           NULL |
+|      7 | ceo       |           NULL |           NULL |
++--------+-----------+----------------+----------------+
+4 rows in set (0.001 sec)
+
+
+4.Write a SQL query to update all the column of table those value is null.
+
+MariaDB [assignment1]> update job_info set job_min_salary = 15500 where job_min_salary is null;
+Query OK, 3 rows affected (0.004 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+MariaDB [assignment1]> select * from job_info;
++--------+-----------+----------------+----------------+
+| job_id | job_title | job_min_salary | job_max_salary |
++--------+-----------+----------------+----------------+
+|      1 | manager   |          25500 |          35000 |
+|      5 | sales     |          15500 |           NULL |
+|      6 | cto       |          15500 |           NULL |
+|      7 | ceo       |          15500 |           NULL |
++--------+-----------+----------------+----------------+
+4 rows in set (0.001 sec)
+
+MariaDB [assignment1]> update job_info set job_max_salary = 25500 where job_max_salary is null;
+Query OK, 3 rows affected (0.004 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+MariaDB [assignment1]> select * from job_info;
++--------+-----------+----------------+----------------+
+| job_id | job_title | job_min_salary | job_max_salary |
++--------+-----------+----------------+----------------+
+|      1 | manager   |          25500 |          35000 |
+|      5 | sales     |          15500 |          25500 |
+|      6 | cto       |          15500 |          25500 |
+|      7 | ceo       |          15500 |          25500 |
++--------+-----------+----------------+----------------+
+4 rows in set (0.001 sec)
+
